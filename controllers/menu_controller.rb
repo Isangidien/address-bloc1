@@ -56,13 +56,11 @@ def view_all_entries
 
         entry_submenu(entry)
       end
-
       system "clear"
       puts "End of entries"
 end
 
 def create_entry
-
      system "clear"
      puts "New AddressBloc Entry"
 
@@ -97,8 +95,10 @@ def read_csv
     case selection
 
       when "n"
+
       when "d"
       when "e"
+        
       when "m"
         system "clear"
         main_menu
