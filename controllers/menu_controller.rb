@@ -98,7 +98,7 @@ def read_csv
 
       when "d"
       when "e"
-        
+
       when "m"
         system "clear"
         main_menu

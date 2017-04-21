@@ -1,4 +1,5 @@
 require_relative 'entry'
+require "csv"
 
 class AddressBook
  attr_reader :entries
@@ -7,11 +8,21 @@ class AddressBook
      @entries = []
    end
 
-   def add_entry(name, phone_number, email)
+   def remove_entry(name, phone, email)
+       # Implementation goes here
+       delete_entry = nil
 
+       entries.each do |entry|
+         if name == entry.name && phone == entry.phone_number && email == entry.email
+           delete_entry = entry
+     end
+   end
+   entries.delete(delete_entry)
+ end
+
+   def add_entry(name, phone_number, email)
      index = 0
      entries.each do |entry|
-
        if name < entry.name
          break
        end
@@ -20,4 +31,15 @@ class AddressBook
 
      entries.insert(index, Entry.new(name, phone_number, email))
    end
- end
+
+   def import_from_csv(file_name)
+     # Implementation goes here
+     csv_text = File.read(file_name)
+     csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
+
+     csv.each do |row|
+    row_hash = row.to_hash
+    add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"])
+    end
+  end
+end
